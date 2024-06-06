@@ -1,11 +1,7 @@
 package org.umss.sis_umss.controllers;
 
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.umss.sis_umss.dtos.GroupDTO;
 import org.umss.sis_umss.dtos.ProfessorDTO;
 import org.umss.sis_umss.dtos.ScheduleDTO;
@@ -17,9 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/subjects")
 public class SubjectController {
 
-    @GetMapping("/subjects/{subjectUuid}/groups")
+    //Get all groups by one subject
+    @GetMapping("/{subjectUuid}/groups")
     public List<GroupDTO> getAll() {
         GroupDTO groupDTO = new GroupDTO();
         groupDTO.setName("Grupo 1");
@@ -28,7 +26,8 @@ public class SubjectController {
         return Collections.singletonList(groupDTO);
     }
 
-    @PostMapping("/subjects/{subjectUuid}/groups")
+    //Create a group into one subject
+    @PostMapping("/{subjectUuid}/groups")
     public GroupDTO create(@PathVariable String subjectUuid, @RequestBody GroupDTO group) {
         group.setUuid(UUID.randomUUID().toString());
         group.setProfessor(new ProfessorDTO(group.getProfessor().getUuid(), "Juan Carlos", "Garcia"));
@@ -36,7 +35,8 @@ public class SubjectController {
         return group;
     }
 
-    @GetMapping("/subjects/{subjectUuid}/groups/{groupUuid}")
+    // Get one group by one subject
+    @GetMapping("/{subjectUuid}/groups/{groupUuid}")
     public GroupDTO getOne(@PathVariable String subjectUuid, @PathVariable String groupUuid){
         GroupDTO groupDTO = new GroupDTO();
         groupDTO.setName("Grupo 1");

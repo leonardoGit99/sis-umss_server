@@ -2,6 +2,7 @@ package org.umss.sis_umss.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.umss.sis_umss.dtos.GroupDTO;
 import org.umss.sis_umss.dtos.ScheduleDTO;
@@ -13,8 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/professors")
 public class ProfessorController {
-    @GetMapping("/professors/{professorUuid}/groups")
+    //Get all groups by a one professor
+    @GetMapping("/{professorUuid}/groups")
     public List<GroupDTO> getAll(@PathVariable String professorUuid) {
         GroupDTO groupDTO = new GroupDTO();
         groupDTO.setName("Grupo 1");

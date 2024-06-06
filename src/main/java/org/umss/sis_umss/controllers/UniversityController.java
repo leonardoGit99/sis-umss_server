@@ -1,13 +1,8 @@
 package org.umss.sis_umss.controllers;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import org.umss.sis_umss.dtos.FacultyDTO;
 import org.umss.sis_umss.dtos.UniversityDTO;
 
 import java.util.Collections;
@@ -15,37 +10,43 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/universities")
 public class UniversityController {
 
-    // Create
-    @PostMapping("/universities")
+    // Get all universities
+    @GetMapping
+    public List<UniversityDTO> getAll() {
+        return Collections.singletonList(new UniversityDTO(UUID.randomUUID().toString(), "UMSS", "Universidad Mayor de San Simon"));
+    }
+
+    // Create university
+    @PostMapping
     public UniversityDTO create(@RequestBody UniversityDTO university) {
         university.setUuid(UUID.randomUUID().toString());
         return university;
     }
 
-    // Read
-    @GetMapping("/universities")
-    public List<UniversityDTO> getAll() {
-        return Collections.singletonList(new UniversityDTO(UUID.randomUUID().toString(), "UMSS", "Universidad Mayor de San Simon"));
-    }
-
-    //Read One
-    @GetMapping("/universities/{universityUuid}")
+    //Get one univesity
+    @GetMapping("/{universityUuid}")
     public UniversityDTO getOne(@PathVariable String universityUuid) {
         return new UniversityDTO(universityUuid, "UMSS", "Universidad Mayor de San Simon");
     }
 
-    // Update
-    @PutMapping("/universities/{universityUuid}")
+    // Update univesity
+    @PutMapping("/{universityUuid}")
     public UniversityDTO update(@PathVariable String universityUuid, @RequestBody UniversityDTO university) {
         return new UniversityDTO(universityUuid, "UMSS", "Universidad Mayor de San Simon 2");
     }
 
-    //Delete
-    @DeleteMapping("/universities/{universityUuid}")
+    //Delete university
+    @DeleteMapping("/{universityUuid}")
     public UniversityDTO delete(@PathVariable String universityUuid) {
         return new UniversityDTO(universityUuid, "UMSS", "Universidad Mayor de San Simon");
     }
 
+    //Get falculties by one univesity
+    @GetMapping("/{universityUuid}/faculties")
+    public List<FacultyDTO> getAllFaculties(@PathVariable String universityUuid){
+        return Collections.singletonList(new FacultyDTO(UUID.randomUUID().toString(), "FCYT", "Facultad de Ciencias y Tecnologia"));
+    }
 }
