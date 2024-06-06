@@ -35,7 +35,7 @@ public class UniversityController {
     // Update univesity
     @PutMapping("/{universityUuid}")
     public UniversityDTO update(@PathVariable String universityUuid, @RequestBody UniversityDTO university) {
-        return new UniversityDTO(universityUuid, "UMSS", "Universidad Mayor de San Simon 2");
+        return new UniversityDTO(UUID.randomUUID().toString(), "UMSS", "Universidad Mayor de San Simon 2");
     }
 
     //Delete university

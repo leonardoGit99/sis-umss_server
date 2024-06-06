@@ -29,7 +29,7 @@ public class FacultyController {
     // Update a faculty
     @PutMapping("/{facultyUuid}")
     public FacultyDTO update(@PathVariable String facultyUuid, @RequestBody FacultyDTO faculty){
-        return new FacultyDTO(facultyUuid, "FCYT", "Facultad de Ciencias y Tecnología 2");
+        return new FacultyDTO(UUID.randomUUID().toString(), "FCYT", "Facultad de Ciencias y Tecnología 2");
     }
 
     // Delete a faculty
