@@ -3,6 +3,7 @@ package org.umss.sis_umss.controllers;
 import org.springframework.web.bind.annotation.*;
 import org.umss.sis_umss.dtos.DepartmentDTO;
 import org.umss.sis_umss.dtos.FacultyDTO;
+import org.umss.sis_umss.dtos.ProfessorDTO;
 import org.umss.sis_umss.dtos.SubjectDTO;
 
 import java.util.Collections;
@@ -44,4 +45,12 @@ public class DepartmentController {
     public List<SubjectDTO> getAllSubjectsByDepartment(){
         return Collections.singletonList(new SubjectDTO(UUID.randomUUID().toString(), "Intro a la programacion", "INTRO-CODE"));
     }
+
+    //Get all professors by department
+    @GetMapping("/{departmentUuid}/professors")
+    public List<ProfessorDTO> getAllProfessorsByDepartment() {
+        return Collections.singletonList(new ProfessorDTO(UUID.randomUUID().toString(), "Juan Carlos", "Garcia"));
+    }
+
+
 }

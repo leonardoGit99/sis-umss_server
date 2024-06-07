@@ -65,9 +65,16 @@ public class SubjectController {
         return new SubjectDTO(UUID.randomUUID().toString(), "Intro a la programacion 2", "INTRO-CODE");
     }
 
+    // Delete subject
     @DeleteMapping("{subjectUuid}")
     public SubjectDTO deleteSubject(@PathVariable String subjectUuid) {
         //Logic: if subject doesn't belong  a group, so...
         return new SubjectDTO(subjectUuid, "Intro a la programacion ", "INTRO-CODE");
+    }
+
+    // Get all professors by subject
+    @GetMapping("{subjectUuid}/professors")
+    public List<ProfessorDTO> getAllProfessorsBySubject(@PathVariable String subjectUuid) {
+        return Collections.singletonList(new ProfessorDTO(UUID.randomUUID().toString(), "Juan Carlos", "Torres"));
     }
 }
