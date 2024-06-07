@@ -1,9 +1,11 @@
 package org.umss.sis_umss.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.umss.sis_umss.dtos.FacultyDTO;
 import org.umss.sis_umss.dtos.UniversityDTO;
+import org.umss.sis_umss.services.UniversityService;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,23 +15,25 @@ import java.util.UUID;
 @RequestMapping("/universities")
 public class UniversityController {
 
+    @Autowired
+    private UniversityService universityService;
+
     // Get all universities
     @GetMapping
     public List<UniversityDTO> getAll() {
-        return Collections.singletonList(new UniversityDTO(UUID.randomUUID().toString(), "UMSS", "Universidad Mayor de San Simon"));
+       return universityService.getAllUniversities();
     }
 
     // Create university
     @PostMapping
     public UniversityDTO create(@RequestBody UniversityDTO university) {
-        university.setUuid(UUID.randomUUID().toString());
-        return university;
+        return universityService.saveUniversity(university);
     }
 
     //Get one univesity
     @GetMapping("/{universityUuid}")
     public UniversityDTO getOne(@PathVariable String universityUuid) {
-        return new UniversityDTO(universityUuid, "UMSS", "Universidad Mayor de San Simon");
+       return universityService.getUniversity(universityUuid);
     }
 
     // Update univesity
