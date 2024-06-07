@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.umss.sis_umss.dtos.UniversityDTO;
 import org.umss.sis_umss.dtos.UniversityMapper;
+import org.umss.sis_umss.exceptions.NotFoundException;
 import org.umss.sis_umss.models.University;
 import org.umss.sis_umss.repositories.UniversityRepository;
 
@@ -27,7 +28,9 @@ public class UniversityService {
 
     public UniversityDTO getUniversity(String universityUuid) {
         University university = universityRepository.findOneByUuid(universityUuid);
-        
+        if (university == null) {
+            throw new NotFoundException("University", universityUuid);
+        }
 
         return universityMapper.toDTO(universityRepository.findOneByUuid(universityUuid));
     }
