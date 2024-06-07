@@ -26,6 +26,9 @@ public class UniversityService {
     }
 
     public UniversityDTO getUniversity(String universityUuid) {
+        University university = universityRepository.findOneByUuid(universityUuid);
+        
+
         return universityMapper.toDTO(universityRepository.findOneByUuid(universityUuid));
     }
 
