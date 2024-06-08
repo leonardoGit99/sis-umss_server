@@ -16,14 +16,14 @@ import java.util.Date;
 public class SisResponseEntityExceptionHandler  extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) throws Exception {
-        SisExceptionResponse sisExceptionResponse = new SisExceptionResponse(new Date(), ex.getMessage());
-        return  new ResponseEntity(sisExceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
+        SisExceptionResponse sisExceptionResponse = new SisExceptionResponse(new Date(), "InternalServerError", request.getDescription(false));
+        return  new ResponseEntity<>(sisExceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public final ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request) throws Exception {
-        SisExceptionResponse sisExceptionResponse = new SisExceptionResponse(new Date(), ex.getMessage());
-        return  new ResponseEntity(sisExceptionResponse, HttpStatus.NOT_FOUND);
+    public final ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request)  {
+        SisExceptionResponse sisExceptionResponse = new SisExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return  new ResponseEntity<>(sisExceptionResponse, HttpStatus.NOT_FOUND);
     }
 }
