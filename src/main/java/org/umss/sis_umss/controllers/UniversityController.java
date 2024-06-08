@@ -62,6 +62,8 @@ public class UniversityController {
     //Get falculties by one univesity
     @GetMapping("/{universityUuid}/faculties")
     public List<FacultyDTO> getAllFaculties(@PathVariable String universityUuid){
-        return Collections.singletonList(new FacultyDTO(UUID.randomUUID().toString(), "FCYT", "Facultad de Ciencias y Tecnologia"));
+        List<FacultyDTO> facultyDTOList = this.universityService.getFaculties(universityUuid);
+//        return Collections.singletonList(new FacultyDTO(UUID.randomUUID().toString(), "FCYT", "Facultad de Ciencias y Tecnologia"));
+        return facultyDTOList;
     }
 }
